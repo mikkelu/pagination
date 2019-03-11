@@ -24,7 +24,6 @@ extension QueryBuilder where Result: Paginatable & Content, Result.Database == D
         for req: Request,
         pageKey: String = Pagination.defaultPageKey,
         perPageKey: String = Pagination.defaultPerPageKey,
-        sorts: [Result.Database.QuerySort] = Result.defaultPageSorts,
         _ transform: @escaping (QueryBuilder) throws -> Future<[R]>
         ) throws -> Future<Page<R>> {
 
@@ -34,7 +33,7 @@ extension QueryBuilder where Result: Paginatable & Content, Result.Database == D
             per = maxPer
         }
 
-        return try self.getPage(current: page, per: per, sorts: sorts, transform: transform)
+        return try self.getPage(current: page, per: per, transform: transform)
     }
 
     /// Get a `Page` from the current `QueryBuilder` from a `Request`.

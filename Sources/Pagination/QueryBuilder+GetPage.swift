@@ -22,7 +22,7 @@ extension QueryBuilder where Result: Paginatable & Content, Result.Database == D
     public func getPage<R: Content>(
         current page: Int,
         per: Int = Result.defaultPageSize,
-        sorts: [Result.Database.QuerySort] = Result.defaultPageSorts,
+        sorts: [Result.Database.QuerySort] = [],
         transform: @escaping (QueryBuilder) throws -> Future<[R]>
         ) throws -> Future<Page<R>> {
 
